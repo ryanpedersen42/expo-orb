@@ -1,0 +1,13 @@
+description: >
+  This command publishes to Expo
+
+parameters:
+  publish_channel:
+      default: "production"
+      description: Channel to use for publishment
+      type: string
+steps:
+    - run: 
+        name: Publish Expo 
+        command: | 
+            npx expo-cli publish --release-channel <<parameters.publish_channel>> --non-interactive

@@ -1,0 +1,11 @@
+description: >
+  Expo MacOS executor
+
+macos:
+  xcode: '<<parameters.macos_version>>'
+parameters:
+  macos_version:
+    default: '12.0.3'
+    description: >
+      Choose Xcode version https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions
+    type: string

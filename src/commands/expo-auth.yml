@@ -1,0 +1,24 @@
+description: >
+  This command authenticates with Expo
+parameters:
+    expo_username:
+      default: EXPO_USERNAME
+      description: The name of the environmental variable holding the Expo username.
+      type: env_var_name
+    expo_password:
+      default: EXPO_PASSWORD
+      description: The name of the environmental variable holding the Expo password.
+      type: env_var_name 
+steps: 
+    - run:
+        name: Expo CLI Authentication
+        command: |
+          : "${<<parameters.expo_username>>?Expo Username and Password \
+          must be set as Environment variables before running this command.}"
+          : "${<<parameters.expo_password>>?Expo Username and Password \
+          must be set as Environment variables before running this command.}"
+
+          echo "configuring expo CLI for ${<<parameters.expo_username>>}"
+
+          sudo npm install -g expo-cli
+          npx expo-cli login -u $EXPO_USERNAME -p $EXPO_PASSWORD

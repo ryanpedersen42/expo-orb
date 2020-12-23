@@ -1,5 +1,5 @@
 description: >
-  This is a sample executor using Docker and Node.
+  Expo node executor
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
 parameters:
