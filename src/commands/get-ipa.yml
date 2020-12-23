@@ -1,0 +1,7 @@
+description: >
+  This command gets the most recent ipa build URL and downloads the ipa
+steps:
+  - run:
+      name: Get iOS binary 
+      command: |
+        curl -o app.ipa "$(expo url:ipa --non-interactive)"

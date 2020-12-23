@@ -1,0 +1,24 @@
+description: >
+  This command builds your iOS and Android apps across two nodes 
+parameters:
+  timeout:
+    default: "30m"
+    description: How many minutes to wait before giving up. (Unpaid accounts need to wait in the queues to build in Expo.)
+    type: string
+steps:
+  - run: 
+      name: Check for parallelism
+      command: |
+        if [ $NODE_TOTAL -ne 2 ]; then
+          echo "Need to have parallelism set to 2"
+          exit 1
+        fi
+
+  - run: 
+      command: |
+        if [ $CIRCLE_NODE_INDEX -eq 0 ]; then
+          npx expo-cli build:android --release-channel production --non-interactive --no-publish 
+        elif [ $CIRCLE_NODE_INDEX -eq 1]; then
+          npx expo-cli build:ios --release-channel production --non-interactive --no-publish 
+        fi
+      no_output_timeout: <<parameters.timeout>>    

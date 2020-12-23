@@ -1,0 +1,26 @@
+parameters:
+  android:
+      default: true
+      type: boolean
+  ios: 
+      default: true 
+      type: boolean 
+  timeout:
+    default: "30m"
+    description: How many minutes to wait before giving up. (Unpaid accounts need to wait in the queues to build in Expo.)
+    type: string
+steps:
+  - when: 
+      condition: <<parameters.android>>
+      steps: 
+        - run: 
+            command: |
+                npx expo-cli build:android --release-channel production --non-interactive --no-publish 
+            no_output_timeout: <<parameters.timeout>>
+  - when: 
+      condition: <<parameters.ios>>
+      steps: 
+        - run:
+            command: |
+                npx expo-cli build:ios --release-channel production --non-interactive --no-publish 
+            no_output_timeout: <<parameters.timeout>>
